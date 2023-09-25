@@ -19,9 +19,13 @@ public class MainActivity extends AppCompatActivity {
     public void calculateResult(View view) {
         String input1 = inputText1.getText().toString();
         String input2 = inputText2.getText().toString();
+        if(input1.isEmpty() || input2.isEmpty()){
+            Toast.makeText(this, "Please enter a number", Toast.LENGTH_SHORT).show();
+            return;
+        }
         int num1 = Integer.parseInt(input1);
         int num2 = Integer.parseInt(input2);
-        int result = 0;
+        double result = 0.0;
         //action of add, subtract, multiply and divide
         if (view.getId() == R.id.addButton) {
             result = num1 + num2;
@@ -34,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Invalid input cannot be divided by 0", Toast.LENGTH_SHORT).show();
                 return;
             }
-            result = num1 / num2;
+            result = (double)num1 / (double)num2;
         }
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra("result", String.valueOf(result));
